@@ -31,6 +31,11 @@ public class WalkerAgent : Agent
     //If false, the goal velocity will be walkingSpeed
     public bool randomizeWalkSpeedEachEpisode;
 
+    //The direction an agent will walk during training.
+    private Vector3 m_WorldDirToWalk = Vector3.right;
+
+    [Header("Target To Walk Towards")] public Transform target; //Target the agent will walk towards during training.
+
     [Header("Body Parts")] public Transform hips;
     public Transform chest;
     public Transform spine;
@@ -62,6 +67,7 @@ public class WalkerAgent : Agent
         masteragentcount++;
         m_OrientationCube = GetComponentInChildren<OrientationCubeController>();
         m_DirectionIndicator = GetComponentInChildren<DirectionIndicator>();
+        target = GetComponentInChildren<TargetController>().transform;
 
         //Setup each body part
         m_JdController = GetComponent<JointDriveController>();
@@ -174,6 +180,8 @@ public class WalkerAgent : Agent
         sensor.AddObservation(Quaternion.FromToRotation(hips.forward, cubeForward));
         sensor.AddObservation(Quaternion.FromToRotation(head.forward, cubeForward));
 
+        //Position of target position relative to cube
+        sensor.AddObservation(m_OrientationCube.transform.InverseTransformPoint(target.transform.position));
     
         sensor.AddObservation(head.position.y-hips.position.y);
         
@@ -227,6 +235,7 @@ public class WalkerAgent : Agent
     //Update OrientationCube and DirectionIndicator
     void UpdateOrientationObjects()
     {
+        m_WorldDirToWalk = target.position - hips.position;
         m_OrientationCube.UpdateOrientation(hips);
         if (m_DirectionIndicator)
         {
@@ -272,13 +281,33 @@ public class WalkerAgent : Agent
         // + 2*feetup
         // + displacement_head_hips_reward
         // ; 
-        head_feet_v_distance = Mathf.Min(head_feet_v_distance,5.0f);
-        var reward = 
-        head_feet_v_distance
-        ; 
+        head_feet_v_distance = Mathf.Min(head_feet_v_distance,5.0f)/5;
+        var reward = head_feet_v_distance; 
 
+        if (head_feet_v_distance>3.5){
+            var torsoForward = m_OrientationCube.transform.forward;
 
-        AddReward(reward/5.0f);
+            var torsoForward_2D = new Vector2(torsoForward.x,torsoForward.z);
+
+            var dirToTarget = target.position - m_OrientationCube.transform.position;
+
+            var dirToTarget_2D = new Vector2(dirToTarget.x,dirToTarget.z);
+
+            var a = Vector2.Angle(torsoForward_2D,dirToTarget_2D);
+
+            var facingReward = (180.0f-a)/180.0f;
+
+            reward += facingReward;
+
+            if (a<50){
+                //var target_2d = new Vector2(transform.position.x,transform.position.z);
+                //var pos_2d = new Vector2( m_OrientationCube.transform.position.x, m_OrientationCube.transform.position.z);
+                var matchSpeedReward = GetMatchingVelocityReward(torsoForward * MTargetWalkingSpeed, GetAvgVelocity());
+                reward += matchSpeedReward;
+            }
+        }
+
+        AddReward(reward/3.0f);
     }
 
     //Returns the average velocity of all of the body parts
