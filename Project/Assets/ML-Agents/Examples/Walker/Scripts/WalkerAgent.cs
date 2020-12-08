@@ -9,6 +9,9 @@ using Random = UnityEngine.Random;
 
 public class WalkerAgent : Agent
 {
+    public static int masteragentcount=0;
+    public static int masteragentindext=0;
+
     [Header("Walk Speed")]
     [Range(0.1f, 10)]
     [SerializeField]
@@ -27,11 +30,6 @@ public class WalkerAgent : Agent
     //If true, walkSpeed will be randomly set between zero and m_maxWalkingSpeed in OnEpisodeBegin() 
     //If false, the goal velocity will be walkingSpeed
     public bool randomizeWalkSpeedEachEpisode;
-
-    //The direction an agent will walk during training.
-    private Vector3 m_WorldDirToWalk = Vector3.right;
-
-    [Header("Target To Walk Towards")] public Transform target; //Target the agent will walk towards during training.
 
     [Header("Body Parts")] public Transform hips;
     public Transform chest;
@@ -61,6 +59,7 @@ public class WalkerAgent : Agent
 
     public override void Initialize()
     {
+        masteragentcount++;
         m_OrientationCube = GetComponentInChildren<OrientationCubeController>();
         m_DirectionIndicator = GetComponentInChildren<DirectionIndicator>();
 
@@ -98,10 +97,21 @@ public class WalkerAgent : Agent
         {
             bodyPart.Reset(bodyPart);
         }
-
+    
         //Random start rotation to help generalize
-        hips.rotation = Quaternion.Euler(0, Random.Range(0.0f, 360.0f), 0);
+        // if (Random.Range(-1.0f,1.0f)>0)
+        {
+            // hips.Translate(new Vector3(0,0.4f,0));
+            // hips.rotation = Quaternion.Euler(Random.Range(-263.0f, -276.0f),180,90.0f);
 
+        } 
+        // else 
+        // {
+        //     hips.rotation = Quaternion.Euler(Random.Range(-83.0f, -96.0f),0,-90.0f);
+        // }
+
+        transform.RotateAround(hips.position,Vector3.up,Random.Range(0.0f, 360.0f));
+        
         UpdateOrientationObjects();
 
         //Set our goal walking speed
@@ -109,6 +119,8 @@ public class WalkerAgent : Agent
             randomizeWalkSpeedEachEpisode ? Random.Range(0.1f, m_maxWalkingSpeed) : MTargetWalkingSpeed;
 
         SetResetParameters();
+
+        masteragentindext++;
     }
 
     /// <summary>
@@ -130,7 +142,12 @@ public class WalkerAgent : Agent
         if (bp.rb.transform != hips && bp.rb.transform != handL && bp.rb.transform != handR)
         {
             sensor.AddObservation(bp.rb.transform.localRotation);
-            sensor.AddObservation(bp.currentStrength / m_JdController.maxJointForceLimit);
+            var ob = bp.currentStrength / m_JdController.maxJointForceLimit;
+            if (float.IsNaN(ob)){
+                sensor.AddObservation(0);
+            } else {
+                sensor.AddObservation(ob);
+            }
         }
     }
 
@@ -157,9 +174,11 @@ public class WalkerAgent : Agent
         sensor.AddObservation(Quaternion.FromToRotation(hips.forward, cubeForward));
         sensor.AddObservation(Quaternion.FromToRotation(head.forward, cubeForward));
 
-        //Position of target position relative to cube
-        sensor.AddObservation(m_OrientationCube.transform.InverseTransformPoint(target.transform.position));
-
+    
+        sensor.AddObservation(head.position.y-hips.position.y);
+        
+        sensor.AddObservation((footL.position.y+footR.position.y)/2-hips.position.y);
+        
         foreach (var bodyPart in m_JdController.bodyPartsList)
         {
             CollectObservationBodyPart(bodyPart, sensor);
@@ -208,8 +227,7 @@ public class WalkerAgent : Agent
     //Update OrientationCube and DirectionIndicator
     void UpdateOrientationObjects()
     {
-        m_WorldDirToWalk = target.position - hips.position;
-        m_OrientationCube.UpdateOrientation(hips, target);
+        m_OrientationCube.UpdateOrientation(hips);
         if (m_DirectionIndicator)
         {
             m_DirectionIndicator.MatchOrientation(m_OrientationCube.transform);
@@ -220,39 +238,47 @@ public class WalkerAgent : Agent
     {
         UpdateOrientationObjects();
 
-        var cubeForward = m_OrientationCube.transform.forward;
+        var head_hip_v_distance = head.position.y-hips.position.y;  //<0 to ca. 2.0
+        var hip_feet_v_distance = hips.position.y- (footL.position.y+footR.position.y)/2; // max ca. 2.3
+        var head_feet_v_distance = head.position.y- (footL.position.y+footR.position.y)/2; // max ca. 2.3
 
-        // Set reward for this step according to mixture of the following elements.
-        // a. Match target speed
-        //This reward will approach 1 if it matches perfectly and approach zero as it deviates
-        var matchSpeedReward = GetMatchingVelocityReward(cubeForward * MTargetWalkingSpeed, GetAvgVelocity());
+        
 
-        //Check for NaNs
-        if (float.IsNaN(matchSpeedReward))
-        {
-            throw new ArgumentException(
-                "NaN in moveTowardsTargetReward.\n" +
-                $" cubeForward: {cubeForward}\n" +
-                $" hips.velocity: {m_JdController.bodyPartsDict[hips].rb.velocity}\n" +
-                $" maximumWalkingSpeed: {m_maxWalkingSpeed}"
-            );
-        }
+        var feetcenter = (footL.position+footR.position)/2;
 
-        // b. Rotation alignment with target direction.
-        //This reward will approach 1 if it faces the target direction perfectly and approach zero as it deviates
-        var lookAtTargetReward = (Vector3.Dot(cubeForward, head.forward) + 1) * .5F;
+        var horizontal_hip_feet_displacement_x = feetcenter.x-hips.position.x;
+        var horizontal_hip_feet_displacement_y = feetcenter.y-hips.position.y;
 
-        //Check for NaNs
-        if (float.IsNaN(lookAtTargetReward))
-        {
-            throw new ArgumentException(
-                "NaN in lookAtTargetReward.\n" +
-                $" cubeForward: {cubeForward}\n" +
-                $" head.forward: {head.forward}"
-            );
-        }
+        var horizontal_displacement_feet_hips = Mathf.Sqrt(horizontal_hip_feet_displacement_x*horizontal_hip_feet_displacement_x+horizontal_hip_feet_displacement_y*horizontal_hip_feet_displacement_y);
+        
+        var horizontal_hip_head_displacement_x = hips.position.x-head.position.x;
+        var horizontal_hip_head_displacement_y = hips.position.y-head.position.y;
+        
+        var horizontal_displacement_head_hips = Mathf.Sqrt(horizontal_hip_head_displacement_x*horizontal_hip_head_displacement_x+horizontal_hip_head_displacement_y*horizontal_hip_head_displacement_y);
+        
+        var displacement_head_hips_reward = 1.0f/(1.0f+horizontal_displacement_head_hips); //0->1
+        var displacement_feet_hips_reward = 1.0f/(1.0f+horizontal_displacement_feet_hips); //0->1
 
-        AddReward(matchSpeedReward * lookAtTargetReward);
+
+
+        
+        var feetup = (footL.up.y+footR.up.y)/2;//max 1
+// 
+        // alter Reward
+        // var reward = 
+        // head_hip_v_distance //max 2
+        // + hip_feet_v_distance //max 2.3
+        // + displacement_feet_hips_reward //max 1
+        // + 2*feetup
+        // + displacement_head_hips_reward
+        // ; 
+        head_feet_v_distance = Mathf.Min(head_feet_v_distance,5.0f);
+        var reward = 
+        head_feet_v_distance
+        ; 
+
+
+        AddReward(reward/5.0f);
     }
 
     //Returns the average velocity of all of the body parts
@@ -291,7 +317,7 @@ public class WalkerAgent : Agent
     /// </summary>
     public void TouchedTarget()
     {
-        AddReward(1f);
+       // AddReward(1f);
     }
 
     public void SetTorsoMass()

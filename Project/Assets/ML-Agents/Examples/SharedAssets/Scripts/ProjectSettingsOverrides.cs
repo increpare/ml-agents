@@ -54,6 +54,7 @@ namespace Unity.MLAgentsExamples
 
             // Make sure the Academy singleton is initialized first, since it will create the SideChannels.
             Academy.Instance.EnvironmentParameters.RegisterCallback("gravity", f => { Physics.gravity = new Vector3(0, -f, 0); });
+
         }
 
         public void OnDestroy()

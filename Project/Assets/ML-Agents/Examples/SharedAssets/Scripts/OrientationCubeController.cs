@@ -8,9 +8,9 @@ namespace Unity.MLAgentsExamples
     public class OrientationCubeController : MonoBehaviour
     {
         //Update position and Rotation
-        public void UpdateOrientation(Transform rootBP, Transform target)
+        public void UpdateOrientation(Transform rootBP)
         {
-            var dirVector = target.position - transform.position;
+            var dirVector = Vector3.right;
             dirVector.y = 0; //flatten dir on the y. this will only work on level, uneven surfaces
             var lookRot =
                 dirVector == Vector3.zero
