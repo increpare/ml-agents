@@ -251,7 +251,7 @@ public class WormAgent : Agent
     /// </summary>
     void UpdateOrientationObjects()
     {
-        m_OrientationCube.UpdateOrientation(bodySegment0);
+        m_OrientationCube.UpdateOrientation(bodySegment0,m_Target);
         if (m_DirectionIndicator)
         {
             m_DirectionIndicator.MatchOrientation(m_OrientationCube.transform);

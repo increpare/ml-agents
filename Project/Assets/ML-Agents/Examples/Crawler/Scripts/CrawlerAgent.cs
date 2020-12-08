@@ -316,7 +316,7 @@ public class CrawlerAgent : Agent
     /// </summary>
     void UpdateOrientationObjects()
     {
-        m_OrientationCube.UpdateOrientation(body);
+        m_OrientationCube.UpdateOrientation(body,m_Target);
         if (m_DirectionIndicator)
         {
             m_DirectionIndicator.MatchOrientation(m_OrientationCube.transform);

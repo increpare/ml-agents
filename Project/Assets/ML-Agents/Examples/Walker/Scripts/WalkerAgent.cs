@@ -236,7 +236,7 @@ public class WalkerAgent : Agent
     void UpdateOrientationObjects()
     {
         m_WorldDirToWalk = target.position - hips.position;
-        m_OrientationCube.UpdateOrientation(hips);
+        m_OrientationCube.UpdateOrientation(hips,target);
         if (m_DirectionIndicator)
         {
             m_DirectionIndicator.MatchOrientation(m_OrientationCube.transform);
@@ -281,11 +281,11 @@ public class WalkerAgent : Agent
         // + 2*feetup
         // + displacement_head_hips_reward
         // ; 
-        head_feet_v_distance = Mathf.Min(head_feet_v_distance,5.0f)/5;
-        var reward = head_feet_v_distance; 
+        head_feet_v_distance = Mathf.Min(head_feet_v_distance,5.0f);
+        var reward = head_feet_v_distance/5; 
 
         if (head_feet_v_distance>3.5){
-            var torsoForward = m_OrientationCube.transform.forward;
+            var torsoForward = hips.forward;
 
             var torsoForward_2D = new Vector2(torsoForward.x,torsoForward.z);
 
@@ -294,8 +294,13 @@ public class WalkerAgent : Agent
             var dirToTarget_2D = new Vector2(dirToTarget.x,dirToTarget.z);
 
             var a = Vector2.Angle(torsoForward_2D,dirToTarget_2D);
-
+            if (a<30){
+                a=30;//clamp so as to not have the robot optimize exactly
+            }
             var facingReward = (180.0f-a)/180.0f;
+
+            Debug.DrawRay(hips.transform.position,new Vector3(dirToTarget_2D.x,0,dirToTarget_2D.y),Color.red);
+            Debug.DrawRay(hips.transform.position,new Vector3(torsoForward_2D.x,0,torsoForward_2D.y),Color.cyan);
 
             reward += facingReward;
 
