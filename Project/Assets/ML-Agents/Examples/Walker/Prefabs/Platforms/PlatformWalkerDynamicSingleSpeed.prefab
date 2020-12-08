@@ -71,12 +71,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Model
       value: 
-      objectReference: {fileID: 11400000, guid: 8cbae6de45ea44d0c97366e252052722,
-        type: 3}
+      objectReference: {fileID: 0}
     - target: {fileID: 8228205183255162979, guid: 095e843732bad4a02b273c01eaff4b26,
         type: 3}
       propertyPath: m_BrainParameters.VectorObservationSize
       value: 245
+      objectReference: {fileID: 0}
+    - target: {fileID: 8228205183255162979, guid: 095e843732bad4a02b273c01eaff4b26,
+        type: 3}
+      propertyPath: m_BehaviorName
+      value: WalkerStatic
       objectReference: {fileID: 0}
     - target: {fileID: 8228205183255163001, guid: 095e843732bad4a02b273c01eaff4b26,
         type: 3}
