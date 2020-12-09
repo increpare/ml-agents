@@ -65,7 +65,7 @@ PrefabInstance:
     - target: {fileID: 6907740118844148851, guid: f0d7741d9e06247f6843b921a206b978,
         type: 3}
       propertyPath: m_Name
-      value: PlatformDynamicTarget
+      value: PlatformWalkerDynamicVariableSpeed
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f0d7741d9e06247f6843b921a206b978, type: 3}
@@ -153,6 +153,11 @@ PrefabInstance:
       propertyPath: rotTest
       value: 
       objectReference: {fileID: 5047057869477872341}
+    - target: {fileID: 7230369666416833497, guid: 90f3321ab5beb43e28bc651909d99e39,
+        type: 3}
+      propertyPath: MaxStep
+      value: 5000
+      objectReference: {fileID: 0}
     - target: {fileID: 7818481575132336858, guid: 90f3321ab5beb43e28bc651909d99e39,
         type: 3}
       propertyPath: m_ConnectedAnchor.x
