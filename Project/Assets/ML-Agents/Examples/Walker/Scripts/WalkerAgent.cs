@@ -67,7 +67,9 @@ public class WalkerAgent : Agent
         masteragentcount++;
         m_OrientationCube = GetComponentInChildren<OrientationCubeController>();
         m_DirectionIndicator = GetComponentInChildren<DirectionIndicator>();
-        target = GetComponentInChildren<TargetController>().transform;
+        if (target==null){
+            target = GetComponentInChildren<TargetController>().transform;
+        }
 
         //Setup each body part
         m_JdController = GetComponent<JointDriveController>();

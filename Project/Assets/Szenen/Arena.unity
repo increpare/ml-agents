@@ -157,7 +157,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -224,6 +224,16 @@ PrefabInstance:
         type: 3}
       propertyPath: MaxStep
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3892099730176258027, guid: 294a8bee0a123924db7068d37c6f5f9d,
+        type: 3}
+      propertyPath: target
+      value: 
+      objectReference: {fileID: 1218703340}
+    - target: {fileID: 3892099730176258027, guid: 294a8bee0a123924db7068d37c6f5f9d,
+        type: 3}
+      propertyPath: randomizeWalkSpeedEachEpisode
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4527306625307332328, guid: 294a8bee0a123924db7068d37c6f5f9d,
         type: 3}
@@ -433,7 +443,7 @@ PrefabInstance:
     - target: {fileID: 6674361782725066968, guid: 294a8bee0a123924db7068d37c6f5f9d,
         type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 6674361782725066968, guid: 294a8bee0a123924db7068d37c6f5f9d,
         type: 3}
@@ -532,6 +542,16 @@ PrefabInstance:
         type: 3}
       propertyPath: MaxStep
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3892099730176258027, guid: 294a8bee0a123924db7068d37c6f5f9d,
+        type: 3}
+      propertyPath: target
+      value: 
+      objectReference: {fileID: 1218703340}
+    - target: {fileID: 3892099730176258027, guid: 294a8bee0a123924db7068d37c6f5f9d,
+        type: 3}
+      propertyPath: randomizeWalkSpeedEachEpisode
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4527306625307332328, guid: 294a8bee0a123924db7068d37c6f5f9d,
         type: 3}
@@ -927,6 +947,16 @@ PrefabInstance:
       propertyPath: MaxStep
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3892099730176258027, guid: 294a8bee0a123924db7068d37c6f5f9d,
+        type: 3}
+      propertyPath: target
+      value: 
+      objectReference: {fileID: 1218703340}
+    - target: {fileID: 3892099730176258027, guid: 294a8bee0a123924db7068d37c6f5f9d,
+        type: 3}
+      propertyPath: randomizeWalkSpeedEachEpisode
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4527306625307332328, guid: 294a8bee0a123924db7068d37c6f5f9d,
         type: 3}
       propertyPath: m_ConnectedAnchor.x
@@ -1243,7 +1273,7 @@ Transform:
   m_LocalScale: {x: 100, y: 0.3, z: 100}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1092851798
 GameObject:
@@ -1275,7 +1305,7 @@ Transform:
   - {fileID: 1921028738}
   - {fileID: 650822878}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1218703340 stripped
 Transform:
@@ -1294,6 +1324,16 @@ PrefabInstance:
         type: 3}
       propertyPath: MaxStep
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3892099730176258027, guid: 294a8bee0a123924db7068d37c6f5f9d,
+        type: 3}
+      propertyPath: target
+      value: 
+      objectReference: {fileID: 1218703340}
+    - target: {fileID: 3892099730176258027, guid: 294a8bee0a123924db7068d37c6f5f9d,
+        type: 3}
+      propertyPath: randomizeWalkSpeedEachEpisode
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4527306625307332328, guid: 294a8bee0a123924db7068d37c6f5f9d,
         type: 3}
@@ -1522,6 +1562,68 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 294a8bee0a123924db7068d37c6f5f9d, type: 3}
+--- !u!1 &1522035985
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1522035988}
+  - component: {fileID: 1522035987}
+  - component: {fileID: 1522035986}
+  m_Layer: 0
+  m_Name: WalkerDynamicSettings
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1522035986
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1522035985}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec51f47c5ed0478080c449c74fd9c154, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gravityMultiplier: 1
+  fixedDeltaTime: 0.01333
+  maximumDeltaTime: 0.15
+  solverIterations: 12
+  solverVelocityIterations: 12
+  reuseCollisionCallbacks: 1
+--- !u!114 &1522035987
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1522035985}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d6f3eab3776b4fb79724ac4216dfd7b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &1522035988
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1522035985}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 2, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 10
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1921028737
 GameObject:
   m_ObjectHideFlags: 0
@@ -1697,7 +1799,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400004, guid: 815dd74271590504d827ee9ba152f13b, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 400004, guid: 815dd74271590504d827ee9ba152f13b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -1745,6 +1847,16 @@ PrefabInstance:
         type: 3}
       propertyPath: MaxStep
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3892099730176258027, guid: 294a8bee0a123924db7068d37c6f5f9d,
+        type: 3}
+      propertyPath: target
+      value: 
+      objectReference: {fileID: 1218703340}
+    - target: {fileID: 3892099730176258027, guid: 294a8bee0a123924db7068d37c6f5f9d,
+        type: 3}
+      propertyPath: randomizeWalkSpeedEachEpisode
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4527306625307332328, guid: 294a8bee0a123924db7068d37c6f5f9d,
         type: 3}
