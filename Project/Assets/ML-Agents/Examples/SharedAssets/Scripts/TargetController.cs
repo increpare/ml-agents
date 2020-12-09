@@ -76,7 +76,7 @@ namespace Unity.MLAgentsExamples
         public void MoveTargetToRandomPosition()
         {
             var newTargetPos = m_startingPos + (Random.insideUnitSphere * spawnRadius);
-            newTargetPos.y = m_startingPos.y;
+            newTargetPos.y = m_startingPos.y + Random.Range(-3.0f,0.0f);
             transform.position = newTargetPos;
         }
 
