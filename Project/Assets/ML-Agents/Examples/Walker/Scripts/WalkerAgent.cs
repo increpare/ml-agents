@@ -283,16 +283,15 @@ public class WalkerAgent : Agent
         // + 2*feetup
         // + displacement_head_hips_reward
         // ; 
-        head_feet_v_distance = Mathf.Min(head_feet_v_distance,4.5f);
-        var reward = head_feet_v_distance/4.5f; 
+        var reward = Mathf.Min(head_feet_v_distance,5.0f)/5.0f; 
 
-        if (head_feet_v_distance>4.5f){
+        if (head_feet_v_distance>4.0f){
 
             var cubeForward = m_OrientationCube.transform.forward;
             var matchSpeedReward = GetMatchingVelocityReward(cubeForward * MTargetWalkingSpeed, GetAvgVelocity());
             
             var lookAtTargetReward = (Vector3.Dot(cubeForward, head.forward) + 1) * .5F;
-            reward += 3*matchSpeedReward * lookAtTargetReward;
+            reward += 10*matchSpeedReward * lookAtTargetReward;
         }
 
         AddReward(reward/3.0f);
