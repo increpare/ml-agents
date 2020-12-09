@@ -281,35 +281,16 @@ public class WalkerAgent : Agent
         // + 2*feetup
         // + displacement_head_hips_reward
         // ; 
-        head_feet_v_distance = Mathf.Min(head_feet_v_distance,5.0f);
-        var reward = head_feet_v_distance/5; 
+        head_feet_v_distance = Mathf.Min(head_feet_v_distance,4.5f);
+        var reward = head_feet_v_distance/4.5f; 
 
-        if (head_feet_v_distance>3.5){
-            var torsoForward = hips.forward;
+        if (head_feet_v_distance>3.5f){
 
-            var torsoForward_2D = new Vector2(torsoForward.x,torsoForward.z);
-
-            var dirToTarget = target.position - m_OrientationCube.transform.position;
-
-            var dirToTarget_2D = new Vector2(dirToTarget.x,dirToTarget.z);
-
-            var a = Vector2.Angle(torsoForward_2D,dirToTarget_2D);
-            if (a<30){
-                a=30;//clamp so as to not have the robot optimize exactly
-            }
-            var facingReward = (180.0f-a)/180.0f;
-
-            Debug.DrawRay(hips.transform.position,new Vector3(dirToTarget_2D.x,0,dirToTarget_2D.y),Color.red);
-            Debug.DrawRay(hips.transform.position,new Vector3(torsoForward_2D.x,0,torsoForward_2D.y),Color.cyan);
-
-            reward += facingReward;
-
-            if (a<50){
-                //var target_2d = new Vector2(transform.position.x,transform.position.z);
-                //var pos_2d = new Vector2( m_OrientationCube.transform.position.x, m_OrientationCube.transform.position.z);
-                var matchSpeedReward = GetMatchingVelocityReward(torsoForward * MTargetWalkingSpeed, GetAvgVelocity());
-                reward += matchSpeedReward;
-            }
+            var cubeForward = m_OrientationCube.transform.forward;
+            var matchSpeedReward = GetMatchingVelocityReward(cubeForward * MTargetWalkingSpeed, GetAvgVelocity());
+            
+            var lookAtTargetReward = (Vector3.Dot(cubeForward, head.forward) + 1) * .5F;
+            reward += 3*matchSpeedReward * lookAtTargetReward;
         }
 
         AddReward(reward/3.0f);
@@ -340,7 +321,7 @@ public class WalkerAgent : Agent
     {
         //distance between our actual velocity and goal velocity
         var velDeltaMagnitude = Mathf.Clamp(Vector3.Distance(actualVelocity, velocityGoal), 0, MTargetWalkingSpeed);
-
+        Debug.DrawRay(hips.position,Vector3.up*velDeltaMagnitude);
         //return the value on a declining sigmoid shaped curve that decays from 1 to 0
         //This reward will approach 1 if it matches perfectly and approach zero as it deviates
         return Mathf.Pow(1 - Mathf.Pow(velDeltaMagnitude / MTargetWalkingSpeed, 2), 2);

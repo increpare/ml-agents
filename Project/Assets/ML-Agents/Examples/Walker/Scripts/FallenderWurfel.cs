@@ -18,7 +18,8 @@ public class FallenderWurfel : MonoBehaviour
         var points = new Transform[]{agent.handL,agent.handR,agent.footL,agent.footR,agent.head,agent.armL,agent.armR,agent.thighL,agent.thighR,agent.shinL,agent.shinR,agent.forearmL,agent.forearmR,agent.chest};
         var target = points[Random.Range(0,points.Length)];
         var rb = target.GetComponent<Rigidbody>();
-        rb.AddForce(forcestrength*Random.onUnitSphere,ForceMode.Impulse);
+        var f = forcestrength*Random.onUnitSphere;
+        rb.AddForce(f,ForceMode.Impulse);
 
     }
 
@@ -32,6 +33,7 @@ public class FallenderWurfel : MonoBehaviour
         if (time>period){
             time-=period;
             RandoForce();
+            period = Random.Range(1.0f,3.0f);
         }
     }
 

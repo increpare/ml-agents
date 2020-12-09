@@ -7359,6 +7359,11 @@ PrefabInstance:
       propertyPath: randomizeWalkSpeedEachEpisode
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 889389741788676810, guid: 8daf438e1a41f4d06850cacc91aa175f,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 989645215718731972, guid: 8daf438e1a41f4d06850cacc91aa175f,
         type: 3}
       propertyPath: m_ConnectedAnchor.x
