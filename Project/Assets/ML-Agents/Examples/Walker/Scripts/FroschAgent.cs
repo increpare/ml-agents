@@ -70,6 +70,9 @@ public class FroschAgent : Agent
     private List<Quaternion> orig_part_rotations = new List<Quaternion>();
     private List<GroundContact> groundContacts = new List<GroundContact>();
 
+    public float jointDampen=20000;
+    public float jointForce=40000;
+
     void RegisterBodyPart(Transform transform){
         bodyparts.Add(transform);
         rigidbodies.Add(transform.GetComponent<Rigidbody>());
@@ -77,6 +80,12 @@ public class FroschAgent : Agent
         orig_part_rotations.Add(transform.localRotation);
 
         var joints = transform.GetComponents<HingeJoint>();
+        foreach(var joint in joints){
+            var s = joint.spring;
+            s.damper=jointDampen;
+            s.spring=jointForce;
+            joint.spring=s;
+        }
         hingeJoints.AddRange(joints);
 
         var gc = transform.GetComponent<GroundContact>();
@@ -241,9 +250,9 @@ public class FroschAgent : Agent
             var hj = hingeJoints[i];
             if (hj.useLimits){
                 var clamped = Mathf.Clamp(continuousActions[j],-1,1);
-                var m = hj.motor;
-                m.targetVelocity = hj.limits.min+(hj.limits.max-hj.limits.min)*clamped;
-                hj.motor=m;
+                var m = hj.spring;
+                m.targetPosition = hj.limits.min+(hj.limits.max-hj.limits.min)*clamped;
+                hj.spring=m;
                 j++;
             }
         }
@@ -268,7 +277,8 @@ public class FroschAgent : Agent
 
         var cubeForward = m_OrientationCube.transform.forward;
         var matchSpeedReward = GetMatchingVelocityReward(cubeForward * MTargetWalkingSpeed, GetAvgVelocity());
-        
+        Debug.DrawRay(hips.transform.position,cubeForward,Color.yellow);
+        Debug.DrawRay(hips.transform.position,-head.right,Color.cyan);
         var lookAtTargetReward = (Vector3.Dot(cubeForward, -head.right) + 1) * .5F;//-head.right is actually forward
         var reward = matchSpeedReward * lookAtTargetReward;
 

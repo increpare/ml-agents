@@ -17,7 +17,7 @@ MonoBehaviour:
   hasUpgradedFromAgentParameters: 1
   MaxStep: 4000
   m_TargetWalkingSpeed: 10
-  randomizeWalkSpeedEachEpisode: 0
+  randomizeWalkSpeedEachEpisode: 1
   target: {fileID: 889389741788676810}
   hips: {fileID: 6843228887091342912}
   head: {fileID: 7650993352954541338}
@@ -44,6 +44,8 @@ MonoBehaviour:
   toeR2: {fileID: 6009710336393350340}
   toeR3: {fileID: 3897553514557553103}
   rigidbodies: []
+  jointDampen: 30
+  jointForce: 100
 --- !u!114 &3500864914844990631
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -377,7 +379,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   agent: {fileID: 3543970837943055727}
-  forcestrength: 100
+  forcestrength: 20
 --- !u!1001 &2161650710944920434
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -479,7 +481,8 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Model
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 5022602860645237092, guid: a7cb6761ff60a7a44a5f104fc85d3aed,
+        type: 3}
     - target: {fileID: 8228205183255162979, guid: 095e843732bad4a02b273c01eaff4b26,
         type: 3}
       propertyPath: m_BrainParameters.VectorObservationSize
@@ -578,6 +581,11 @@ PrefabInstance:
       propertyPath: m_UseSpring
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 223168176877309152, guid: a8c018cf6844bf74aa6e7700f854ec84,
+        type: 3}
+      propertyPath: m_Spring.damper
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 3984878835005870356, guid: a8c018cf6844bf74aa6e7700f854ec84,
         type: 3}
       propertyPath: m_ConnectedAnchor.x
@@ -607,6 +615,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_UseMotor
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3984878835005870358, guid: a8c018cf6844bf74aa6e7700f854ec84,
+        type: 3}
+      propertyPath: m_Spring.damper
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 3984878835005870359, guid: a8c018cf6844bf74aa6e7700f854ec84,
         type: 3}
@@ -657,6 +670,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_UseMotor
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3984878836152579530, guid: a8c018cf6844bf74aa6e7700f854ec84,
+        type: 3}
+      propertyPath: m_Spring.damper
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 3984878836152579531, guid: a8c018cf6844bf74aa6e7700f854ec84,
         type: 3}
@@ -713,6 +731,11 @@ PrefabInstance:
       propertyPath: m_UseSpring
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3984878836417936525, guid: a8c018cf6844bf74aa6e7700f854ec84,
+        type: 3}
+      propertyPath: m_Spring.damper
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 3984878836647176536, guid: a8c018cf6844bf74aa6e7700f854ec84,
         type: 3}
       propertyPath: m_ConnectedAnchor.x
@@ -747,6 +770,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_UseMotor
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3984878836647176538, guid: a8c018cf6844bf74aa6e7700f854ec84,
+        type: 3}
+      propertyPath: m_Spring.damper
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 3984878836647176539, guid: a8c018cf6844bf74aa6e7700f854ec84,
         type: 3}
@@ -798,6 +826,11 @@ PrefabInstance:
       propertyPath: m_UseMotor
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3984878836681997388, guid: a8c018cf6844bf74aa6e7700f854ec84,
+        type: 3}
+      propertyPath: m_Spring.damper
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 3984878836681997389, guid: a8c018cf6844bf74aa6e7700f854ec84,
         type: 3}
       propertyPath: m_ConnectedAnchor.y
@@ -838,6 +871,11 @@ PrefabInstance:
       propertyPath: m_UseSpring
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3984878836848678572, guid: a8c018cf6844bf74aa6e7700f854ec84,
+        type: 3}
+      propertyPath: m_Spring.damper
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 3984878836848678575, guid: a8c018cf6844bf74aa6e7700f854ec84,
         type: 3}
       propertyPath: m_ConnectedAnchor.x
@@ -862,6 +900,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_UseSpring
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3984878836848678575, guid: a8c018cf6844bf74aa6e7700f854ec84,
+        type: 3}
+      propertyPath: m_Spring.damper
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 4378325768045180197, guid: a8c018cf6844bf74aa6e7700f854ec84,
         type: 3}
@@ -888,6 +931,11 @@ PrefabInstance:
       propertyPath: m_UseSpring
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4378325768045180197, guid: a8c018cf6844bf74aa6e7700f854ec84,
+        type: 3}
+      propertyPath: m_Spring.damper
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 4661182962007496411, guid: a8c018cf6844bf74aa6e7700f854ec84,
         type: 3}
       propertyPath: m_ConnectedAnchor.z
@@ -912,6 +960,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_UseSpring
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4661182962007496411, guid: a8c018cf6844bf74aa6e7700f854ec84,
+        type: 3}
+      propertyPath: m_Spring.damper
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 4930543454604824484, guid: a8c018cf6844bf74aa6e7700f854ec84,
         type: 3}
@@ -973,6 +1026,11 @@ PrefabInstance:
       propertyPath: m_UseSpring
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4930543454604824537, guid: a8c018cf6844bf74aa6e7700f854ec84,
+        type: 3}
+      propertyPath: m_Spring.damper
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 7402627472137932961, guid: a8c018cf6844bf74aa6e7700f854ec84,
         type: 3}
       propertyPath: m_ConnectedAnchor.x
@@ -997,6 +1055,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_UseSpring
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7402627472137932961, guid: a8c018cf6844bf74aa6e7700f854ec84,
+        type: 3}
+      propertyPath: m_Spring.damper
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 8230212865849556427, guid: a8c018cf6844bf74aa6e7700f854ec84,
         type: 3}
