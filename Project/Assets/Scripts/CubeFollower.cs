@@ -16,7 +16,7 @@ public class CubeFollower : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         nma.updatePosition=false;
         nma.updateRotation=false;
-        updatewait+=Random.RandomRange(-0.1f,0.1f);
+        updatewait+=Random.Range(-0.1f,0.1f);
     }
 
 public float forceamount=5.0f;

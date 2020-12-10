@@ -9,9 +9,6 @@ using Random = UnityEngine.Random;
 
 public class WalkerAgent : Agent
 {
-    public static int masteragentcount=0;
-    public static int masteragentindext=0;
-
     [Header("Walk Speed")]
     [Range(0.1f, 30)]
     [SerializeField]
@@ -64,7 +61,6 @@ public class WalkerAgent : Agent
 
     public override void Initialize()
     {
-        masteragentcount++;
         m_OrientationCube = GetComponentInChildren<OrientationCubeController>();
         m_DirectionIndicator = GetComponentInChildren<DirectionIndicator>();
         if (target==null){
@@ -127,8 +123,6 @@ public class WalkerAgent : Agent
             randomizeWalkSpeedEachEpisode ? Random.Range(0.1f, m_maxWalkingSpeed) : MTargetWalkingSpeed;
 
         SetResetParameters();
-
-        masteragentindext++;
     }
 
     /// <summary>
