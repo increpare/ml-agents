@@ -156,12 +156,17 @@ PrefabInstance:
     - target: {fileID: 8228205183255162981, guid: 095e843732bad4a02b273c01eaff4b26,
         type: 3}
       propertyPath: maxJointSpring
-      value: 80000
+      value: 100000
       objectReference: {fileID: 0}
     - target: {fileID: 8228205183255162981, guid: 095e843732bad4a02b273c01eaff4b26,
         type: 3}
       propertyPath: jointDampen
       value: 20000
+      objectReference: {fileID: 0}
+    - target: {fileID: 8228205183255162981, guid: 095e843732bad4a02b273c01eaff4b26,
+        type: 3}
+      propertyPath: maxJointForceLimit
+      value: 40000
       objectReference: {fileID: 0}
     - target: {fileID: 8228205183255163001, guid: 095e843732bad4a02b273c01eaff4b26,
         type: 3}

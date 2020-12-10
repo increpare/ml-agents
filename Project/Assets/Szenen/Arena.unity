@@ -546,6 +546,11 @@ PrefabInstance:
       propertyPath: maxJointSpring
       value: 100000
       objectReference: {fileID: 0}
+    - target: {fileID: 6674361782725066973, guid: 294a8bee0a123924db7068d37c6f5f9d,
+        type: 3}
+      propertyPath: maxJointForceLimit
+      value: 30000
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 294a8bee0a123924db7068d37c6f5f9d, type: 3}
 --- !u!1 &295354914
@@ -879,6 +884,11 @@ PrefabInstance:
         type: 3}
       propertyPath: maxJointSpring
       value: 100000
+      objectReference: {fileID: 0}
+    - target: {fileID: 6674361782725066973, guid: 294a8bee0a123924db7068d37c6f5f9d,
+        type: 3}
+      propertyPath: maxJointForceLimit
+      value: 30000
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 294a8bee0a123924db7068d37c6f5f9d, type: 3}
@@ -1300,6 +1310,11 @@ PrefabInstance:
       propertyPath: maxJointSpring
       value: 100000
       objectReference: {fileID: 0}
+    - target: {fileID: 6674361782725066973, guid: 294a8bee0a123924db7068d37c6f5f9d,
+        type: 3}
+      propertyPath: maxJointForceLimit
+      value: 30000
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 294a8bee0a123924db7068d37c6f5f9d, type: 3}
 --- !u!1 &888061358
@@ -1693,6 +1708,11 @@ PrefabInstance:
         type: 3}
       propertyPath: maxJointSpring
       value: 100000
+      objectReference: {fileID: 0}
+    - target: {fileID: 6674361782725066973, guid: 294a8bee0a123924db7068d37c6f5f9d,
+        type: 3}
+      propertyPath: maxJointForceLimit
+      value: 30000
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 294a8bee0a123924db7068d37c6f5f9d, type: 3}
@@ -2427,6 +2447,11 @@ PrefabInstance:
         type: 3}
       propertyPath: maxJointSpring
       value: 100000
+      objectReference: {fileID: 0}
+    - target: {fileID: 6674361782725066973, guid: 294a8bee0a123924db7068d37c6f5f9d,
+        type: 3}
+      propertyPath: maxJointForceLimit
+      value: 30000
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 294a8bee0a123924db7068d37c6f5f9d, type: 3}
