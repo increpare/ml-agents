@@ -70,9 +70,8 @@ public class FroschAgent : Agent
     private List<Quaternion> orig_part_rotations = new List<Quaternion>();
     private List<GroundContact> groundContacts = new List<GroundContact>();
 
-    public float jointDampen=20000;
-    public float jointForce=40000;
-
+    public float jointForce=200;
+    
     void RegisterBodyPart(Transform transform){
         bodyparts.Add(transform);
         rigidbodies.Add(transform.GetComponent<Rigidbody>());
@@ -81,10 +80,10 @@ public class FroschAgent : Agent
 
         var joints = transform.GetComponents<HingeJoint>();
         foreach(var joint in joints){
-            var s = joint.spring;
-            s.damper=jointDampen;
-            s.spring=jointForce;
-            joint.spring=s;
+            var m = joint.motor;
+            m.force=jointForce;
+            m.targetVelocity=0;
+            joint.motor=m;
         }
         hingeJoints.AddRange(joints);
 
@@ -236,7 +235,7 @@ public class FroschAgent : Agent
         }
         foreach (var hinge in hingeJoints){
             if (hinge.useLimits){
-                sensor.AddObservation((hinge.spring.targetPosition-hinge.limits.min)/(hinge.limits.max-hinge.limits.min));
+                sensor.AddObservation(hinge.motor.targetVelocity);
             }
         }
         
@@ -250,9 +249,9 @@ public class FroschAgent : Agent
             var hj = hingeJoints[i];
             if (hj.useLimits){
                 var clamped = Mathf.Clamp(continuousActions[j],-1,1);
-                var m = hj.spring;
-                m.targetPosition = hj.limits.min+(hj.limits.max-hj.limits.min)*clamped;
-                hj.spring=m;
+                var m = hj.motor;
+                m.targetVelocity =1000*clamped;
+                hj.motor=m;
                 j++;
             }
         }

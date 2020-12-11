@@ -44,8 +44,7 @@ MonoBehaviour:
   toeR2: {fileID: 6009710336393350340}
   toeR3: {fileID: 3897553514557553103}
   rigidbodies: []
-  jointDampen: 30
-  jointForce: 100
+  jointForce: 150
 --- !u!114 &3500864914844990631
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -481,7 +480,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Model
       value: 
-      objectReference: {fileID: 5022602860645237092, guid: a7cb6761ff60a7a44a5f104fc85d3aed,
+      objectReference: {fileID: 5022602860645237092, guid: d7fe62625f7b7d14da8fd14a62c677eb,
         type: 3}
     - target: {fileID: 8228205183255162979, guid: 095e843732bad4a02b273c01eaff4b26,
         type: 3}
@@ -574,12 +573,12 @@ PrefabInstance:
     - target: {fileID: 223168176877309152, guid: a8c018cf6844bf74aa6e7700f854ec84,
         type: 3}
       propertyPath: m_UseMotor
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 223168176877309152, guid: a8c018cf6844bf74aa6e7700f854ec84,
         type: 3}
       propertyPath: m_UseSpring
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 223168176877309152, guid: a8c018cf6844bf74aa6e7700f854ec84,
         type: 3}
@@ -620,6 +619,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Spring.damper
       value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 3984878835005870358, guid: a8c018cf6844bf74aa6e7700f854ec84,
+        type: 3}
+      propertyPath: m_UseSpring
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3984878835005870359, guid: a8c018cf6844bf74aa6e7700f854ec84,
         type: 3}
@@ -676,6 +680,11 @@ PrefabInstance:
       propertyPath: m_Spring.damper
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 3984878836152579530, guid: a8c018cf6844bf74aa6e7700f854ec84,
+        type: 3}
+      propertyPath: m_UseSpring
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3984878836152579531, guid: a8c018cf6844bf74aa6e7700f854ec84,
         type: 3}
       propertyPath: m_ConnectedAnchor.y
@@ -724,12 +733,12 @@ PrefabInstance:
     - target: {fileID: 3984878836417936525, guid: a8c018cf6844bf74aa6e7700f854ec84,
         type: 3}
       propertyPath: m_UseMotor
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3984878836417936525, guid: a8c018cf6844bf74aa6e7700f854ec84,
         type: 3}
       propertyPath: m_UseSpring
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3984878836417936525, guid: a8c018cf6844bf74aa6e7700f854ec84,
         type: 3}
@@ -924,12 +933,12 @@ PrefabInstance:
     - target: {fileID: 4378325768045180197, guid: a8c018cf6844bf74aa6e7700f854ec84,
         type: 3}
       propertyPath: m_UseMotor
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4378325768045180197, guid: a8c018cf6844bf74aa6e7700f854ec84,
         type: 3}
       propertyPath: m_UseSpring
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4378325768045180197, guid: a8c018cf6844bf74aa6e7700f854ec84,
         type: 3}
@@ -954,12 +963,12 @@ PrefabInstance:
     - target: {fileID: 4661182962007496411, guid: a8c018cf6844bf74aa6e7700f854ec84,
         type: 3}
       propertyPath: m_UseMotor
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4661182962007496411, guid: a8c018cf6844bf74aa6e7700f854ec84,
         type: 3}
       propertyPath: m_UseSpring
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4661182962007496411, guid: a8c018cf6844bf74aa6e7700f854ec84,
         type: 3}
@@ -1019,12 +1028,12 @@ PrefabInstance:
     - target: {fileID: 4930543454604824537, guid: a8c018cf6844bf74aa6e7700f854ec84,
         type: 3}
       propertyPath: m_UseMotor
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4930543454604824537, guid: a8c018cf6844bf74aa6e7700f854ec84,
         type: 3}
       propertyPath: m_UseSpring
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4930543454604824537, guid: a8c018cf6844bf74aa6e7700f854ec84,
         type: 3}
@@ -1049,12 +1058,12 @@ PrefabInstance:
     - target: {fileID: 7402627472137932961, guid: a8c018cf6844bf74aa6e7700f854ec84,
         type: 3}
       propertyPath: m_UseMotor
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7402627472137932961, guid: a8c018cf6844bf74aa6e7700f854ec84,
         type: 3}
       propertyPath: m_UseSpring
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7402627472137932961, guid: a8c018cf6844bf74aa6e7700f854ec84,
         type: 3}
